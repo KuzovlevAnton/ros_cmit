@@ -1,0 +1,8 @@
+<launch>
+
+    <include file="$(find car_anton)/launch/gazebo.launch" />
+    <include file="$(find car_anton)/launch/slam_gmapping.launch" />
+    <include file="$(find car_anton)/launch/move_base.launch" />
+    <include file="$(find car_anton)/launch/rviz.launch" />
+
+</launch>
