@@ -1,0 +1,14 @@
+<launch>
+
+  <!-- <arg name="map_file" default="$(find bot_navigation)/map/new_maze.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" /> -->
+
+  <include file="$(find car_anton)/launch/gazebo.launch" />
+
+  <include file="$(find car_anton)/launch/amcl.launch" />
+
+  <include file="$(find car_anton)/launch/move_base.launch" />
+  
+  <include file="$(find car_anton)/launch/rviz.launch" />
+
+</launch>
