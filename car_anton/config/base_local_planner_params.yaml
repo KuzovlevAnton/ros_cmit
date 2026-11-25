@@ -1,6 +1,11 @@
 TrajectoryPlannerROS:
+<<<<<<< HEAD
   max_vel_x: 0.6
   min_vel_x: -0.6
+=======
+  max_vel_x: 0.35
+  min_vel_x: -0.35
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   max_vel_theta: 0.8
   min_in_place_vel_theta: 0.4
   acc_lim_theta: 1.5

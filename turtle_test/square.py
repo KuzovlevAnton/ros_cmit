@@ -5,7 +5,11 @@ from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 
 
+<<<<<<< HEAD
 def forward(distance, accuracy=0.001):
+=======
+def forward(distance, accuracy=0.00001):
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
     global x,y,theta,max_velocity,max_acceleration,twist
     start_x=x
     start_y=y
@@ -18,7 +22,11 @@ def forward(distance, accuracy=0.001):
     twist = Twist()
     cmd_vel_pub.publish(twist)
 
+<<<<<<< HEAD
 def turn_by(theta_turn, accuracy=0.001):
+=======
+def turn_by(theta_turn, accuracy=0.00001):
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
     global x,y,theta,max_angular_velocity,max_angular_acceleration,twist,pi
     start_theta=theta
     while abs(start_theta-theta) < theta_turn and not rospy.is_shutdown():

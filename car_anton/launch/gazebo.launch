@@ -12,6 +12,10 @@ car_anton)/bot_gazebo.xacro" />
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
     </include>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
     <node name="joint_state_publisher" pkg="joint_state_publisher"
 type="joint_state_publisher" />
     <node name="robot_state_publisher" pkg="robot_state_publisher"
@@ -24,7 +28,10 @@ respawn="false" output="screen"
     args="-urdf -x $(arg x) -y $(arg y) -z $(arg z) -model $(arg
 robot_name) -param robot_description"/>
 
+<<<<<<< HEAD
     <include file="$(find car_anton)/launch/camera_control.launch">
     </include>
 
+=======
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
 </launch>

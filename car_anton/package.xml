@@ -61,10 +61,13 @@
   <build_depend>actionlib</build_depend>
   <build_depend>gmapping</build_depend>
   <build_depend>amcl</build_depend>
+<<<<<<< HEAD
 
   <build_depend>controller_manager</build_depend>
   <build_depend>joint_state_controller</build_depend>
   <build_depend>robot_state_publisher</build_depend>
+=======
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   <!-- <build_depend>teb_local_planner</build_depend> -->
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>nav_msgs</build_export_depend>
@@ -77,10 +80,13 @@
   <build_export_depend>actionlib</build_export_depend>
   <build_export_depend>gmapping</build_export_depend>
   <build_export_depend>amcl</build_export_depend>
+<<<<<<< HEAD
   
   <build_export_depend>controller_manager</build_export_depend>
   <build_export_depend>joint_state_controller</build_export_depend>
   <build_export_depend>robot_state_publisher</build_export_depend>
+=======
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   <!-- <build_export_depend>teb_local_planner</build_export_depend> -->
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
@@ -93,6 +99,7 @@
   <exec_depend>actionlib</exec_depend>
   <exec_depend>gmapping</exec_depend>
   <exec_depend>amcl</exec_depend>
+<<<<<<< HEAD
 
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_controller</exec_depend>
@@ -102,6 +109,10 @@
 
     
 
+=======
+  <!-- <exec_depend>teb_local_planner</exec_depend> -->
+
+>>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->
