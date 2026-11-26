@@ -13,7 +13,7 @@
     </include>
     <include>
       <uri>model://my_field</uri>
-      <pose>0 0.5 0 0 0 1.57075</pose>
+      <pose>0.5 0 0 0 0 1.57075</pose>
     </include>
   </world>
 </sdf>
