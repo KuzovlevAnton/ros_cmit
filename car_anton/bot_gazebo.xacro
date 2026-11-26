@@ -1,13 +1,6 @@
 <robot name="car" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-<<<<<<< HEAD
     <xacro:include filename="$(find car_anton)/car.xacro"/>
     <xacro:include filename="$(find car_anton)/gazebo_plugin.xacro"/>
-=======
-    <xacro:include filename="$(find
-car_anton)/car.xacro"/>
-    <xacro:include filename="$(find
-car_anton)/gazebo_plugin.xacro"/>
->>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
 
 </robot>

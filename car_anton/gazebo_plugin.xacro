@@ -1,5 +1,4 @@
 <robot name="car" xmlns:xacro="http://www.ros.org/wiki/xacro" >
-<<<<<<< HEAD
 
   <gazebo>
       <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -41,31 +40,6 @@
   </gazebo>
     
 
-=======
-    <gazebo>
-        <plugin name="differential_drive_controller"
-filename="libgazebo_ros_diff_drive.so">
-            <legacyMode>false</legacyMode>
-            <alwaysOn>true</alwaysOn>
-            <publishWheelTF>true</publishWheelTF>
-            <publishTf>1</publishTf>
-            <publishWheelJointState>true</publishWheelJointState>
-            <updateRate>20000.0</updateRate>
-            <!-- изменить на сочленения правого и левого колеса -->
-            <leftJoint>base_to_left_wheel</leftJoint>
-            <rightJoint>base_to_right_wheel</rightJoint>
-            <wheelSeparation>0.4</wheelSeparation>
-            <wheelDiameter>0.1</wheelDiameter>
-            <wheelAcceleration>1</wheelAcceleration>
-            <torque>20</torque>
-            <commandTopic>/cmd_vel</commandTopic>
-            <odometryTopic>odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
-            <robotBaseFrame>base_link</robotBaseFrame>
-        </plugin>
-    </gazebo>
-    
->>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   <gazebo reference="lidar_link">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
@@ -95,17 +69,12 @@ filename="libgazebo_ros_diff_drive.so">
           <stddev>0.01</stddev>
         </noise>
       </ray>
-<<<<<<< HEAD
-
-=======
->>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
       <plugin name="gazebo_ros_head_hokuyo_controll/camera/er" filename="libgazebo_ros_laser.so">
         <topicName>/laser/scan</topicName>
         <frameName>lidar_link</frameName>
       </plugin>
     </sensor>
   </gazebo>
-<<<<<<< HEAD
 
 
   <gazebo reference="camera_cylinder_1_link">
@@ -145,7 +114,5 @@ filename="libgazebo_ros_diff_drive.so">
         </plugin>
       </sensor>
     </gazebo>
-=======
->>>>>>> db60bdc7462db3417b1db565201c062d09d8c4bc
   
 </robot>

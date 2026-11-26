@@ -54,21 +54,21 @@ class Robot:
 
 
 
-    def turn(self, theta_turn, accuracy=0.001): # + против часовой стрелки, - по
-        start_theta=self.theta
-        while abs(start_theta-self.theta) < theta_turn and not rospy.is_shutdown():
-            if theta_turn > 0:
-                self.twist.angular.z = min(self.max_angular_velocity,
-                self.max_angular_acceleration*(2*(abs(start_theta-self.theta))/self.max_angular_acceleration)**0.5+accuracy,
-                self.max_angular_acceleration*(2*(abs(theta_turn-abs(start_theta-self.theta)))/self.max_angular_acceleration)**0.5+accuracy)
-            if theta_turn < 0:
-                self.twist.angular.z = -min(self.max_angular_velocity,
-                self.max_angular_acceleration*(2*(abs(start_theta-self.theta))/self.max_angular_acceleration)**0.5+accuracy,
-                self.max_angular_acceleration*(2*(abs(theta_turn-abs(start_theta-self.theta)))/self.max_angular_acceleration)**0.5+accuracy)
-            self.cmd_vel_pub.publish(self.twist)
-            self.rate.sleep()
-        self.twist = Twist()
-        self.cmd_vel_pub.publish(self.twist)
+    # def turn(self, theta_turn, accuracy=0.001): # + против часовой стрелки, - по
+    #     start_theta=self.theta
+    #     while abs(start_theta-self.theta) < theta_turn and not rospy.is_shutdown():
+    #         if theta_turn > 0:
+    #             self.twist.angular.z = min(self.max_angular_velocity,
+    #             self.max_angular_acceleration*(2*(abs(start_theta-self.theta))/self.max_angular_acceleration)**0.5+accuracy,
+    #             self.max_angular_acceleration*(2*(abs(theta_turn-abs(start_theta-self.theta)))/self.max_angular_acceleration)**0.5+accuracy)
+    #         if theta_turn < 0:
+    #             self.twist.angular.z = -min(self.max_angular_velocity,
+    #             self.max_angular_acceleration*(2*(abs(start_theta-self.theta))/self.max_angular_acceleration)**0.5+accuracy,
+    #             self.max_angular_acceleration*(2*(abs(theta_turn-abs(start_theta-self.theta)))/self.max_angular_acceleration)**0.5+accuracy)
+    #         self.cmd_vel_pub.publish(self.twist)
+    #         self.rate.sleep()
+    #     self.twist = Twist()
+    #     self.cmd_vel_pub.publish(self.twist)
 
     class PID:
         def __init__(self, kp, ki, kd, i_border=float('inf')):
@@ -114,25 +114,29 @@ class Robot:
 
 
 
-# def get_angular_dist(theta1, theta2): # угловое расстояие между точками [-pi, pi)
-#     global pi
-#     return (theta2-theta1+pi)%(2*pi)-pi
+    def get_angular_dist(self, theta1, theta2): # угловое расстояие между точками [-pi, pi)
+        return (theta2-theta1+self.pi)%(2*self.pi)-self.pi
 
 
-# def turn_by_pid(theta_turn, kp, ki, kd, accuracy=0.00001): # pid регулятор на поворот
-#     global x,y,theta,max_angular_velocity,max_angular_acceleration,twist,pi,i,last_error
-#     start_theta=theta
-#     last_error = 0
-#     i = 0
-#     while abs(get_angular_dist(theta, start_theta+theta_turn)) > accuracy and not rospy.is_shutdown(): # условие завершения: работает пока нужное угловое расстояние не пройдено и программа не завершена
-#         twist = Twist()
-#         error = get_angular_dist(theta, start_theta+theta_turn) # ошибка - оставшееся угловое расстояние
-#         u = pid_reg(error,kp,ki,kd)
-#         twist.angular.z = u
-#         cmd_vel_pub.publish(twist)
-#         rate.sleep()
-#     twist = Twist() # остановка
-#     cmd_vel_pub.publish(twist)
+    def turn_by(self, theta_turn, kp, ki, kd, accuracy=0.001, i_border=float('inf')): # pid регулятор на поворот
+        start_theta=self.theta
+
+        def max_accelerated_angular_velocity(angular_distance):
+            return (2*self.max_angular_acceleration*angular_distance)**0.5
+
+
+        pid=self.PID(kp,ki,kd, i_border=i_border)
+        while abs(self.get_angular_dist(self.theta, start_theta+theta_turn))>accuracy and not rospy.is_shutdown(): # условие завершения: работает пока нужное угловое расстояние не пройдено и программа не завершена
+            max_angular_vel_current=min(self.max_angular_velocity, max_accelerated_angular_velocity(abs(self.get_angular_dist(self.theta, start_theta)))+accuracy,
+                                max_accelerated_angular_velocity(abs(self.get_angular_dist(self.theta, start_theta+theta_turn)))+accuracy)
+            twist = Twist()
+            error = self.get_angular_dist(self.theta, start_theta+theta_turn) # ошибка - оставшееся угловое расстояние
+            u = pid.calculate(error)
+            twist.angular.z = max(-max_angular_vel_current, min(max_angular_vel_current, u))
+            self.cmd_vel_pub.publish(twist)
+            self.rate.sleep()
+        twist = Twist() # остановка
+        self.cmd_vel_pub.publish(twist)
 
 
 
@@ -190,6 +194,7 @@ class Robot:
 if __name__ == "__main__":
     bot = Robot()
     rospy.wait_for_message('/odom', Odometry, timeout=10)
-    # bot.forward(10, 4, 0.001, 1, i_border=0.015)
+    # bot.forward(1, 4, 0.001, 1, i_border=0.015)
+    bot.turn_by(bot.pi, 4, 0.001, 1)
 
 
